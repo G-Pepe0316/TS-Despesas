@@ -18,11 +18,11 @@ export function removerDespesa(despesas: Despesa[], id: Despesa['id']): Despesa[
     return despesas.filter(despesa => despesa.id !== id);// .filter cria um novo array, preservando o array original
 }
 export function despesasDaCategoria(despesas: Despesa[], categoria: Categoria): Despesa[] {
-    // O método .filter() cria e retorna um novo array na memória, mantendo o original intacto
-    return despesas.filter(despesa => despesa.categoria === categoria);
+    return despesas.filter(despesa => despesa.categoria === categoria);//utiliza o .filter para filtrar a categoria especifica
 }
-export function totalGasto(despesas: Despesa[]): number{
-    throw new Error ("não implementado")
+export function totalGasto(despesas: Despesa[]): number {
+    return despesas.reduce((soma, despesa) => soma + despesa.valor, 0);// Utiliza o método .reduce() para acumular a soma dos valores.
+    //o valor sendo 0 incialmente, serve para as listas vazias, onde o retorno será sempre 0.
 }
 export function maiorDespesa(despesas: Despesa[]): Despesa | undefined{
     throw new Error ("não identificado")
