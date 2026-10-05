@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Despesa, Categoria, Mes } from "../src/tipos";
-import {adicionarDespesa} from "../src/despesas";
+import {adicionarDespesa, removerDespesa} from "../src/despesas";
 describe (adicionarDespesa, ()=>{
     it ("retorna um array com despesa adicionada,", () => {
         expect(adicionarDespesa([
@@ -18,3 +18,21 @@ describe (adicionarDespesa, ()=>{
     })
 })
 
+describe (removerDespesa, ()=>{
+    it ("retorna outro array sem uma despesa previamente adicionada,", () => {
+        expect(removerDespesa([
+            {id: "1" , descricao:"Uber", valor:20, categoria:"transporte", mes:1 }],
+            {id: "2", descricao:"Ceia", valor:200, categoria:"alimentação", mes:12 })).toEqual([
+                {id:"1",descricao:"Uber",valor:20,categoria:"transporte",mes:1}
+            ])
+    })
+    it ("caso o id nao exista, retornará o original", ()=> {
+        expect(()=>removerDespesa([{ id: "1", descricao: "Uber", valor: 20, categoria: "transporte", mes: 2 }])).toEqual([
+            {id: "1" , descricao:"Uber", valor:20, categoria:"transporte", mes:1}
+        ])
+    })
+     expect(removerDespesa([{ id: "3", descricao: "Almoço", valor: 20, categoria: "alimentação", mes: 2 },
+        { id: "2", descricao: "Filme", valor: 50, categoria: "lazer", mes: 4 }], 2)).toEqual([
+        { id: 3, descricao: "Almoço", valor: 20, categoria: "alimentação", mes: 2 }
+    ])
+})
