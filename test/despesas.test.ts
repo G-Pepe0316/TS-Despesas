@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Despesa, Categoria, Mes } from "../src/tipos";
-import {adicionarDespesa, despesasDaCategoria, removerDespesa} from "../src/despesas";
+import {adicionarDespesa, despesasDaCategoria, removerDespesa, totalGasto} from "../src/despesas";
 describe (adicionarDespesa, ()=>{
     it ("retorna um array com despesa adicionada,", () => {
         expect(adicionarDespesa([
@@ -49,4 +49,18 @@ describe (despesasDaCategoria, ()=>{
         ])
     }) 
 
+})
+
+describe(totalGasto, ()=>{
+    it("retorna o valor total de todas as despesas até então", ()=>{
+    expect(totalGasto([
+        {id:"1", descricao:"Uber", valor:20,categoria:"transporte",mes:1},
+        {id:"2", descricao:"ceia", valor:200, categoria:"alimentação",mes:12},
+        {id:"10",descricao:"mercado",valor:400,categoria:"alimentação",mes:3}
+    ])).toBe (620)
+})
+    it("caso não haja nada, retornar 0", () =>{
+        expect(totalGasto([])).toBe(0)
+        
+    })
 })
