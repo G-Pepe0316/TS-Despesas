@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Despesa, Categoria, Mes } from "../src/tipos";
-import {adicionarDespesa, despesasDaCategoria, removerDespesa, totalGasto} from "../src/despesas";
+import {adicionarDespesa, despesasDaCategoria, maiorDespesa, removerDespesa, totalGasto} from "../src/despesas";
 describe (adicionarDespesa, ()=>{
     it ("retorna um array com despesa adicionada,", () => {
         expect(adicionarDespesa([
@@ -61,6 +61,22 @@ describe(totalGasto, ()=>{
 })
     it("caso não haja nada, retornar 0", () =>{
         expect(totalGasto([])).toBe(0)
-        
+
     })
+})
+
+describe(maiorDespesa, ()=>{
+    it("retorna a maior despesa", ()=>{
+        expect(maiorDespesa([
+            {id:"1",descricao:"Uber",valor:20,categoria:"transporte",mes:1},
+            {id:"3",descricao:"Pesca",valor:120,categoria:"lazer",mes:6},
+            {id:"2",descricao:"ceia",valor:200,categoria:"alimentação",mes:12},
+            {id:"6",descricao:"agua",valor:415,categoria:"moradia",mes:5}
+        ])).toEqual(
+            {id:"6",descricao:"agua",valor:415,categoria:"moradia",mes:5})    
+    })
+    it("retorna undefined caso não haja nenhum item",()=>{
+        expect(maiorDespesa([])).toBeUndefined()
+    })
+
 })
