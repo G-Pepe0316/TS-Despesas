@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Despesa, Categoria, Mes } from "../src/tipos";
-import {adicionarDespesa, removerDespesa} from "../src/despesas";
+import {adicionarDespesa, despesasDaCategoria, removerDespesa} from "../src/despesas";
 describe (adicionarDespesa, ()=>{
     it ("retorna um array com despesa adicionada,", () => {
         expect(adicionarDespesa([
@@ -35,4 +35,18 @@ describe (removerDespesa, ()=>{
             { id: "1", descricao: "Uber", valor: 20, categoria: "transporte", mes: 1 }
         ])
     })
+})
+
+describe (despesasDaCategoria, ()=>{
+    it ("retorna as despesas de uma mesma categoria especificada", () =>{
+        expect(despesasDaCategoria([
+                {id:"1", descricao:"Uber", valor:20, categoria:"transporte", mes:1},
+                {id:"4",descricao:"Onibus",valor:6, categoria:"transporte", mes:1},
+                {id:"5",descricao:"Piquenique",valor:50,categoria:"lazer",mes:2}
+        ], "transporte")).toEqual([
+            {id:"1",descricao:"Uber", valor:20, categoria:"transporte", mes:1},
+            {id:"4",descricao:"Onibus",valor:6, categoria:"transporte", mes:1}
+        ])
+    }) 
+
 })
