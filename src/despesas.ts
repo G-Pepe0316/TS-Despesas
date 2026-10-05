@@ -1,4 +1,4 @@
-import { Despesa } from "./tipos";
+import { Despesa, Categoria } from "./tipos";
 
 export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] {
   if (nova.valor <= 0) {
@@ -17,8 +17,9 @@ export function removerDespesa(despesas: Despesa[], id: Despesa['id']): Despesa[
     
     return despesas.filter(despesa => despesa.id !== id);// .filter cria um novo array, preservando o array original
 }
-export function despesasDaCategoria(despesas: Despesa[], categoria: Despesa): Despesa[]{
-    throw new Error ("não implementado")
+export function despesasDaCategoria(despesas: Despesa[], categoria: Categoria): Despesa[] {
+    // O método .filter() cria e retorna um novo array na memória, mantendo o original intacto
+    return despesas.filter(despesa => despesa.categoria === categoria);
 }
 export function totalGasto(despesas: Despesa[]): number{
     throw new Error ("não implementado")
